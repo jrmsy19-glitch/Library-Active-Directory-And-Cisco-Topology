@@ -1,7 +1,6 @@
 
 
 
-
 # 🌐 Enterprise Infrastructure Lab: Active Directory Hardening & Cisco Network Topology
 
 ## 📌 Project Overview
@@ -129,17 +128,17 @@ The laboratory build execution, technical checkpoints, and validation behaviors 
       <br/><b>Ref #AD-09:</b> Defining the <code>Mandatory.v6</code> profile target template mapping path.
     </td>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.20.31 PM.jpg" alt="Share Level Access Governance" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/ed869d36-4899-4717-ae26-0013b72281c8" alt="Share Level Access Governance" width="100%"/>
       <br/><b>Ref #AD-10:</b> Assigning Read-Only network sharing security privileges for the <code>Everyone</code> logical group.
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.27.33 PM.jpg" alt="NTFS Security Configuration Matrix" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/67f7eeca-887f-4e04-82fe-be274f45a387" alt="NTFS Security Configuration Matrix" width="100%"/>
       <br/><b>Ref #AD-11:</b> Overhauling NTFS security inheritance schemas to harden local profile assets from modifications.
     </td>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.28.25 PM.jpg" alt="Advanced Security Permission Trees" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/19248eae-e27b-4dbc-a5b0-0ce4d20d4692" alt="Advanced Security Permission Trees" width="100%"/>
       <br/><b>Ref #AD-12:</b> Verifying advanced local security entries match strict baseline read-only access objectives.
     </td>
   </tr>
