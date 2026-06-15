@@ -2,9 +2,6 @@
 
 
 
-
-
-
 # 🌐 Enterprise Infrastructure Lab: Active Directory Hardening & Cisco Network Topology
 
 ## 📌 Project Overview
@@ -118,17 +115,17 @@ The laboratory build execution, technical checkpoints, and validation behaviors 
   </tr>
   <tr>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.12.40 PM.jpg" alt="OU GPO Association - Terminals" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/c640c1e9-bd42-4f51-8938-85db69d3484e" alt="OU GPO Association - Terminals" width="100%"/>
       <br/><b>Ref #AD-07:</b> Validating GPO inheritance and linkage across the <code>Public-Kiosks</code> device container.
     </td>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.17.38 PM.jpg" alt="Profile Root Directory Structure" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/eafd206b-c438-478b-ba90-ed24e1e42ea0" alt="Profile Root Directory Structure" width="100%"/>
       <br/><b>Ref #AD-08:</b> Initializing the centralized <code>Profiles</code> repository folder structure directly within the local disk file system.
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.18.31 PM.jpg" alt="Mandatory Architecture Folder Directory" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/5887ebb0-705a-41b5-a090-f57cbc3996e1" alt="Mandatory Architecture Folder Directory" width="100%"/>
       <br/><b>Ref #AD-09:</b> Defining the <code>Mandatory.v6</code> profile target template mapping path.
     </td>
     <td width="50%" align="center">
