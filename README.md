@@ -5,8 +5,6 @@
 
 
 
-
-
 # 🌐 Enterprise Infrastructure Lab: Active Directory Hardening & Cisco Network Topology
 
 ## 📌 Project Overview
@@ -110,11 +108,11 @@ The laboratory build execution, technical checkpoints, and validation behaviors 
   </tr>
   <tr>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.09.48 PM.jpg" alt="Removable Media Restriction" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/ae6b7d4c-5bac-416f-9d25-d0b2887c5834" alt="Removable Media Restriction" width="100%"/>
       <br/><b>Ref #AD-05:</b> Activating strict Deny-All controls for removable media storage classes to mitigate USB malware risks.
     </td>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.12.37 PM.jpg" alt="OU GPO Association - Users" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/68d877ff-66de-4ee7-8bcc-6fb9d323ad23" alt="OU GPO Association - Users" width="100%"/>
       <br/><b>Ref #AD-06:</b> Linking the hardened Kiosk policy directly to the <code>Public-Generic-Users</code> Organizational Unit.
     </td>
   </tr>
