@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 # 🌐 Enterprise Infrastructure Lab: Active Directory Hardening & Cisco Network Topology
 
 ## 📌 Project Overview
@@ -81,21 +90,21 @@ The laboratory build execution, technical checkpoints, and validation behaviors 
 <table width="100%">
   <tr>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 9.24.27 PM.jpg" alt="GCP Compute Provisioning" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/af63e638-e03d-45e4-bfa4-d5e8617475eb" alt="GCP Compute Provisioning" width="100%"/>
       <br/><b>Ref #AD-01:</b> Provisioning the <code>lib-dc-2022</code> Windows Server Compute Instance within the Google Cloud Platform console.
     </td>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.06.16 PM.jpg" alt="Command Prompt GPO Lockdown" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/68962673-88a7-492a-ba0b-806ddc5cb177" alt="Command Prompt GPO Lockdown" width="100%"/>
       <br/><b>Ref #AD-02:</b> Group Policy Management Editor enabling interactive Command Prompt execution restrictions.
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.06.45 PM.jpg" alt="Registry Editor Block" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/f09d3e69-b970-4140-87b3-6b39d5ae32ca" alt="Registry Editor Block" width="100%"/>
       <br/><b>Ref #AD-03:</b> Enforcing systemic Registry Editing utility blocks under User Configuration Templates.
     </td>
     <td width="50%" align="center">
-      <img src="Screenshot 2026-06-11 at 10.08.23 PM.jpg" alt="Local Drive Visibility Manipulation" width="100%"/>
+      <img src="https://github.com/user-attachments/assets/cb917a6c-464e-4441-ab46-51630b55dca2" alt="Local Drive Visibility Manipulation" width="100%"/>
       <br/><b>Ref #AD-04:</b> Restricting local File Explorer volume navigation to obscure the system <code>C:</code> drive.
     </td>
   </tr>
