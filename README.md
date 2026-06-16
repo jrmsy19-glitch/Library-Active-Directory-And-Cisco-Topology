@@ -1,94 +1,143 @@
-# 🌐 Enterprise Infrastructure Lab: Active Directory Hardening & Cisco Network Topology
+# Windows Server Hardening & Active Directory Infrastructure Deployment (GCP)
 
-## 📌 Project Overview
-This laboratory demonstrates the design, deployment, and testing of a dual-segmented enterprise network architecture modeled for a public library system. The project is split into two foundational operational pillars:
-1. **Identity & Access Management (IAM):** A heavily hardened Microsoft Active Directory environment hosted on Google Cloud Platform (GCP) utilizing strict Group Policy Objects (GPOs) to manage high-turnover public terminals and secure administrative staff workflows.
-2. **Network Infrastructure Architecture:** A resilient Cisco switching and routing topology providing secure VLAN segmentation, dynamic addressing, routing protocols, and perimeter access control layers.
+An enterprise-grade implementation of a secure Windows Server environment running on Google Cloud Platform (GCP). This project demonstrates the implementation of strict security benchmarks, Active Directory (AD) infrastructure engineering, Group Policy Object (GPO) engineering, mandatory user profiles, network print management, and environment isolation designed for a public library kiosk deployment.
 
 ---
 
-## 🛡️ Part 1: Microsoft Active Directory Configuration & System Hardening
+## 🚀 Project Overview
 
-### 🏗️ Directory Architecture & Organizational Unit (OU) Topology
-The domain infrastructure is built upon the **`library.lan`** namespace managed by a virtualized Domain Controller running **Windows Server 2022 Datacenter** (`lib-dc-2022`). To manage assets efficiently and prevent policy bloat, resources were structured into a dedicated hierarchy under the `Public-Library-Root` root container:
+The objective of this project was to design, provision, and secure a multi-user Windows Server environment optimized for high-risk public access kiosks (`library.lan`). By leveraging a Zero Trust configuration at the operating system level, the environment completely isolates guest sessions, enforces strict network and application controls, minimizes the attack surface, and automates policy refreshes.
 
-| Organizational Unit (OU) | Description / Scoped Resources |
-| :--- | :--- |
-| **`Network-Printers`** | Houses active print objects including `Public Printer` and `Staff Printer`. |
-| **`Public-Kiosks`** | Computer accounts for all open-access public terminal hardware. |
-| **`Public-Generic-Users`**| Container for the 20 pre-provisioned guest accounts (`pkiosk1` through `pkiosk20`). |
-| **`Staff-Accounts`** | Identity assets for library personnel with elevated operational needs. |
-| **`Staff-Workstations`** | Secure computer endpoints restricted to authorized staff personnel usage. |
+### Key Highlights
+- **Cloud Infrastructure:** Provisioned via Google Compute Engine with balanced persistent storage.
+- **Identity & Access Management (IAM):** Engineered an Active Directory Organizational Unit (OU) hierarchy to separate workloads and handle temporary generic user sessions.
+- **Group Policy Hardening:** Configured comprehensive GPOs blocking administrative tools, locking down the file system, enforcing whitelisted web browsing, and restricting storage media access.
+- **Session Lifecycle Controls:** Standardized a persistent mandatory profile architecture alongside strict automated logoff time schedules.
 
 ---
 
-### 🔒 Policy Implementation Matrices & Endpoint Hardening
-System behavior is dictated by granular Group Policy Objects designed to fulfill precise compliance mandates across user classifications.
+## 🏗️ Architecture & Technical Specifications
 
-#### 🏢 1. Guest Terminal Hardening & Session Isolation Policy
-Applied directly to the `Public-Kiosks` and `Public-Generic-Users` OUs to completely lock down the operating system footprint:
+### 1. Cloud Provisioning (Google Cloud Platform)
+* **Instance Name:** `lib-dc-2022`
+* **Operating System:** Windows Server 2022 Datacenter (Premium Image)
+* **Compute Engine Tier:** `e2-standard-2` (2 vCPUs, 8 GB Virtual Memory)
+* **Storage Architecture:** 50 GB Balanced Persistent Disk
+* **Cost Efficiency Model:** PAYG (Pay-as-you-go) with per-second billing (~$121.08/month base estimate)
 
-* **Control Plane & Utility Restrictions:**
-  * Disabled Access to **Control Panel** and **PC Settings** to prevent environmental tampering.
-  * Explicitly disabled the **Command Prompt** (`cmd.exe`) and associated interactive batch script processing.
-  * Disabled **Registry Editing Tools** (`regedit.exe`) to prevent low-level configuration modification.
-  * Blocked access to the **Task Manager** to intercept unauthorized process termination.
-  * Removed and disabled the **Run Command** from the Windows Start Menu layout.
-* **Storage & File System Obfuscation:**
-  * Enforced **Hide these specified drives in My Computer** (targeted specifically at restricting visibility of the local C: system drive).
-  * Enforced **All Removable Storage classes: Deny all access** to eliminate malware vectors via physical USB drives and mitigate unauthorized local data extraction.
-* **Session Lifecycle Control:**
-  * Active screensaver deployment paired with a rigid **Screen Timeout lock (10 minutes)** to protect unattended terminals.
-  * Network security filtering implemented via explicit **URL Restriction and Allowance listings** inside browser configuration templates.
+### 2. Active Directory Services (AD DS) Core Structure
+The domain architecture (`library.lan`) uses a centralized container pattern under the root OU `Public-Library-Root` to segregate policy inheritance dynamically:
+* `Public-Library-Root`
+  * 📁 `Network-Printers` (Print server distribution endpoints)
+  * 📁 `Public-Generic-Users` (Targeted guest user accounts `Guest01` to `Guest20`)
+  * 📁 `Public-Kiosks` (Physical kiosk computer account targets)
+  * 📁 `Security-Groups` (RBAC access provisioning groups)
+  * 📁 `Staff-Accounts` / `Staff-Workstations` (Administrative and employee tracking)
 
-#### 👥 2. High-Turnover Mandated Profile Architecture
-To guarantee a zero-persistence terminal behavior across sessions, standard roaming profiles were structurally engineered out of the environment:
-* **Centralized Distribution Share:** Provisioned a network-accessible data share at `\\lib-dc-2022\Profiles\`.
-* **Access Control Lists (ACLs):** Configured permissive Share boundaries alongside restrictive **NTFS Security Permissions** granting `Everyone` explicit **Read-Only** capabilities, blocking guest validation profiles from uploading localized changes back to the root deployment directory.
-* **Registry Hive Mutation:** Manually exposed hidden operating system data structures to rename the user baseline configuration hive from **`NTUSER.DAT`** to **`NTUSER.MAN`** (Mandatory Profile configuration). This forces Windows to drop all cache files and session logs instantly upon user logoff.
-
-#### 👔 3. Corporate Staff & Personnel Management Policy
-Applied strictly to the `Staff-Accounts` security group utilizing Group Policy **Security Filtering**:
-* **Enterprise Folder Redirection:** Configured active target redirection for shell directories including **Desktop** and **Documents** to centralize staff work footprints directly to `\\lib-dc-2022\Staff_Data\`.
-* **Temporal Access Control (Logon Hours):** Bound staff interaction windows strictly to operational hours (**Monday through Saturday, 9:00 AM to 8:00 PM**).
-* **Session Expired Disconnection:** Enforced the GPO security flag: *Disconnect network clients when logon hours expire*, mitigating unauthorized after-hours facility access risks.
-* **Identity Lifecyle Enforcement:** Configured new object profile defaults requiring that the **User must change password at next logon** to guarantee absolute credential privacy during provisioning phases.
+### 3. Session Isolation & Mandatory Profiles
+To enforce absolute data privacy and prevent local environment drift between different guest sessions:
+* Configured an **Advanced Network Share** at `C:\\Profiles` mapped to `\\\\localhost\\Profiles\\mandatory`.
+* Restricted share access strictly to **Read-Only** for the `Everyone` built-in principal, explicitly stripping Full Control or Write mechanics.
+* Created a standardized template within `Mandatory.v6` ensuring that any desktop adjustments, cache files, or session logs are completely purged upon user logoff.
 
 ---
 
-## ⚡ Part 2: Cisco Networking & Topology Configuration
+## 🔒 Security Hardening Policies Reference
 
-### 🌐 Network Core Layout
-The underlying network layer utilizes a secure, hierarchical Cisco architecture designed to maintain strict traffic boundaries between unvetted public data and sensitive library enterprise communications.
+A centralized Group Policy Object named **`Public_Kiosk_Hardening_Policy`** was constructed and enforced across the environment. Below is a matrix of the implemented baseline controls:
 
-### ⚙️ Core Configuration Protocols & Controls
-* **Subnet Segmentation (VLANs):** Hardened boundaries via Virtual Local Area Networks separating infrastructure traffic across distinct security zones:
-  * **VLAN 10 (Public Guest Terminals):** Isolated untrusted clients from adjacent local devices.
-  * **VLAN 20 (Staff & Administration):** Secured internal administrative operations.
-  * **VLAN 99 (Management Native Layer):** Secure, dedicated segment for telnet/SSH and hardware configuration interfaces.
-* **Routing Protocol Mechanics:** Inter-VLAN routing achieved via an optimized **Router-on-a-Stick (RoaS)** topology configuration leveraging sub-interfaces mapped directly to IEEE 802.1Q encapsulation parameters.
-* **Perimeter Traffic Controls (ACLs):** Deployed standard and extended IP Access Control Lists (ACLs) to tightly govern inter-VLAN communications, denying public kiosk endpoints any visibility or packet transmission capabilities into the corporate staff network space.
-* **Automated Network Services:** Configured centralized DHCP pools directly on the router core to dynamically assign appropriate lease ranges, DNS configurations, and default gateways based on connection ports.
+| Category | Policy Rule | Configured State | Objective / Mitigation |
+| :--- | :--- | :--- | :--- |
+| **System Security** | Prevent access to the command prompt | **Enabled** (Script processing blocked) | Blocks arbitrary CLI execution, script exploitation, and interactive `cmd.exe` access. |
+| **System Security** | Prevent access to registry editing tools | **Enabled** (Silent execution blocked) | Disables `regedit.exe` completely, mitigating unauthorized configuration tampering. |
+| **Hardware Control**| All Removable Storage classes: Deny all access | **Enabled** | Eliminates data exfiltration risks and halts malware injection via external USB/CD/DVD drives. |
+| **File System** | Hide these specified drives in My Computer | **Enabled** (Restrict C drive only) | Conceals critical system folder hierarchies from File Explorer and Open dialogs. |
+| **Interface Lockdown**| Prohibit access to Control Panel and PC settings| **Enabled** | Restricts guest users from viewing or altering system configuration menus. |
+| **Shell Hardening** | Remove Run menu from Start Menu | **Enabled** | Denies access to system shortcuts, unwhitelisted paths, or raw execution via the UI. |
+| **Process Control** | Remove Task Manager | **Enabled** (Ctrl+Alt+Del Options) | Prevents users from manually terminating mandatory system services or endpoint monitoring software. |
+| **Inactivity Control**| Screen saver timeout / Enable screen saver | **Enabled** (**300 Seconds** / 5 mins) | Automatically locks/clears active displays during user abandonment intervals. |
+| **Session Control** | Disconnect clients when logon hours expire | **Enabled** (Microsoft Network Server) | Automatically terminates sessions to ensure strict compliance with physical closing hours. |
+| **Network Security**| Define a list of allowed URLs | **Enabled** (Strict Whitelist) | Restricts Microsoft Edge traffic exclusively to authorized domains: `google.com` and `wikipedia.org`. |
 
 ---
 
-## 📸 Part 3: Photo Gallery & Operational Verification Logs
+## 🗺️ Chronological Deployment & Image Glossary
 
-The laboratory build execution, technical checkpoints, and validation behaviors have been comprehensively verified and logged below.
+Below is the verified chronological ledger of the system configuration, capturing real-time evidence of the provisioning, file system development, printer object security mapping, identity constraints, and system-wide policy flashes on **June 12, 2026**.
 
-### 🗂️ Section A: Active Directory Infrastructure & Policy Configuration
+### Phase 1: Environment Isolation & Directory Foundation
+#### [Step 1] Local Security File System Provisions
+* **Timestamp / Date:** 03:17 AM - 03:18 AM | June 12, 2026
+* **Technical Action:** Built out the physical profile directories on the server's primary storage block (`C:\\Profiles\\Mandatory.v6`). Established the network share definitions and locked down security properties to ensure guest sessions pull a static profile without modification capacity.
 
-| Visual Proof Component (Left) | Visual Proof Component (Right) |
-| :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/af63e638-e03d-45e4-bfa4-d5e8617475eb" width="100%" alt="GCP Compute Provisioning"/><br>**Ref #AD-01:** Provisioning the `lib-dc-2022` Windows Server Compute Instance within the Google Cloud Platform console. | <img src="https://github.com/user-attachments/assets/68962673-88a7-492a-ba0b-806ddc5cb177" width="100%" alt="Command Prompt GPO Lockdown"/><br>**Ref #AD-02:** Group Policy Management Editor enabling interactive Command Prompt execution restrictions. |
-| <img src="https://github.com/user-attachments/assets/f09d3e69-b970-4140-87b3-6b39d5ae32ca" width="100%" alt="Registry Editor Block"/><br>**Ref #AD-03:** Enforcing systemic Registry Editing utility blocks under User Configuration Templates. | <img src="https://github.com/user-attachments/assets/cb917a6c-464e-4441-ab46-51630b55dca2" width="100%" alt="Local Drive Visibility Manipulation"/><br>**Ref #AD-04:** Restricting local File Explorer volume navigation to obscure the system `C:` drive. |
-| <img src="https://github.com/user-attachments/assets/ae6b7d4c-5bac-416f-9d25-d0b2887c5834" width="100%" alt="Removable Media Restriction"/><br>**Ref #AD-05:** Activating strict Deny-All controls for removable media storage classes to mitigate USB malware risks. | <img src="https://github.com/user-attachments/assets/68d877ff-66de-4ee7-8bcc-6fb9d323ad23" width="100%" alt="OU GPO Association - Users"/><br>**Ref #AD-06:** Linking the hardened Kiosk policy directly to the `Public-Generic-Users` Organizational Unit. |
-| <img src="https://github.com/user-attachments/assets/c640c1e9-bd42-4f51-8938-85db69d3484e" width="100%" alt="OU GPO Association - Terminals"/><br>**Ref #AD-07:** Validating GPO inheritance and linkage across the `Public-Kiosks` device container. | <img src="https://github.com/user-attachments/assets/eafd206b-c438-478b-ba90-ed24e1e42ea0" width="100%" alt="Profile Root Directory Structure"/><br>**Ref #AD-08:** Initializing the centralized `Profiles` repository folder structure directly within the local disk file system. |
-| <img src="https://github.com/user-attachments/assets/5887ebb0-705a-41b5-a090-f57cbc3996e1" width="100%" alt="Mandatory Architecture Folder Directory"/><br>**Ref #AD-09:** Defining the `Mandatory.v6` profile target template mapping path. | <img src="https://github.com/user-attachments/assets/ed869d36-4899-4717-ae26-0013b72281c8" width="100%" alt="Share Level Access Governance"/><br>**Ref #AD-10:** Assigning Read-Only network sharing security privileges for the `Everyone` logical group. |
-| <img src="https://github.com/user-attachments/assets/67f7eeca-887f-4e04-82fe-be274f45a387" width="100%" alt="NTFS Security Configuration Matrix"/><br>**Ref #AD-11:** Overhauling NTFS security inheritance schemas to harden local profile assets from modifications. | <img src="https://github.com/user-attachments/assets/19248eae-e27b-4dbc-a5b0-0ce4d20d4692" width="100%" alt="Advanced Security Permission Trees"/><br>**Ref #AD-12:** Verifying advanced local security entries match strict baseline read-only access objectives. |
-| <img src="https://github.com/user-attachments/assets/67f7eeca-887f-4e04-82fe-be274f45a387" width="100%" alt="NTFS Security Configuration Matrix"/><br>**Ref #AD-11:** Overhauling NTFS security inheritance schemas to harden local profile assets from modifications. | <img src="https://github.com/user-attachments/assets/19248eae-e27b-4dbc-a5b0-0ce4d20d4692" width="100%" alt="Advanced Security Permission Trees"/><br>**Ref #AD-12:** Verifying advanced local security entries match strict baseline read-only access objectives. |
-| <img src="https://github.com/user-attachments/assets/910f7c2e-e24f-4ddc-8801-684a767a96a7" width="100%" alt="Active Directory Identity Records"/><br>**Ref #AD-13:** Provisioning testing user accounts within the Active Directory Users and Computers management console. | <img src="https://github.com/user-attachments/assets/a13a24b6-8444-4e38-8da2-cf74f0ffcfb2" width="100%" alt="User Network Profile Redirection Pathing"/><br>**Ref #AD-14:** Mapping individual account profile path variables to the explicit mandatory network profile distribution path. |
-| <img src="https://github.com/user-attachments/assets/9b1a8a7f-5d4b-49a5-bce8-0cabd73fda0f" width="100%" alt="Account Profile Attribute Mapping"/><br>**Ref #AD-15:** Finalizing credential initialization and profile environment properties for target validation testing accounts. | <img src="https://github.com/user-attachments/assets/6b520369-9d2e-407b-bd6a-3d69bec5c825" width="100%" alt="Client System Modification Enforcements"/><br>**Ref #AD-16:** Operational endpoint confirmation showing systemic registry restriction blocks are active on a guest session. |
-| <img src="https://github.com/user-attachments/assets/50dad029-8e1c-44b2-94d7-18d8ff434b59" width="100%" alt="Client Shell Restriction Enforcements"/><br>**Ref #AD-17:** Endpoint validation testing confirming successful execution inhibition of the command line interface from a kiosk account. | <img src="https://github.com/user-attachments/assets/72d1227d-319d-4332-8bfb-50bbb77b14c3" width="100%" alt="Domain Controller Policy Checkpoint"/><br>**Ref #AD-18:** Reviewing applied kiosk policy structure and user configuration containers on the primary controller. |
-| <img src="https://github.com/user-attachments/assets/dc030e2e-bece-4d9b-a1ee-e62979fa5442" width="100%" alt="Group Policy Replication Status"/><br>**Ref #AD-19:** Validating domain-wide Group Policy propagation metrics and path linkages across the Active Directory structure. | <img src="https://github.com/user-attachments/assets/91eca108-5287-49ed-b31c-ecae7c9537ac" width="100%" alt="Security Filtering Access Check"/><br>**Ref #AD-20:** Auditing Security Filtering criteria inside the GPMC interface to confirm targeted execution scopes. |
-| <img src="https://github.com/user-attachments/assets/a6bca630-2ea6-4500-b999-28b7ae3d310f" width="100%" alt="Mandatory Hive Validation Logs"/><br>**Ref #AD-21:** Reviewing user environment parameters to ensure read-only baseline mandatory profiles deploy flawlessly. | <img src="https://github.com/user-attachments/assets/3d5f83f8-9c02-40f3-8700-0eb1519d7a24" width="100%" alt="Kiosk Lockdown Final Audit"/><br>**Ref #AD-22:** Final GPO validation audit verifying total restriction and endpoint compliance across the public kiosk user layer. |
+#### [Step 2] Active Directory Schema Layout
+* **Timestamp / Date:** Context Snapshot (Pre-Configuration verification)
+* **Technical Action:** Modeled the domain root tree hierarchy under `library.lan` and established the baseline link structure for the `Public_Kiosk_Hardening_Policy` GPO to guarantee targeted inheritance across the kiosk OUs.
+
+---
+
+### Phase 2: Peripherals & Network Print Architecture
+#### [Step 3] Universal Printer Object Creation
+* **Timestamp / Date:** 03:43 AM | June 12, 2026
+* **Technical Action:** Initialized the Network Printer Installation Wizard on the `lib-dc-2022` host. Provisioned the public-facing printing queue object (`Lib-Public-Kiosk-Printer`) mapped to a localized port using a clean system-compatible text-only abstraction driver.
+
+#### [Step 4] Staff Printer Object Deployment
+* **Timestamp / Date:** 03:45 AM | June 12, 2026
+* **Technical Action:** Provisioned the parallel high-privilege staff printing queue (`Lib-Staff-Only-Printer`). Verified server tracking shows both active printer queues sitting in a steady `Ready` queue status.
+
+#### [Step 5] Access Control List (ACL) Printer Hardening
+* **Timestamp / Date:** 04:18 AM - 04:19 AM | June 12, 2026
+* **Technical Action:** Hardened the print security properties by binding an explicit Role-Based Access Control list. Tied permission models specifically to the `Staff-Prnt-Allowed` security group to prevent public access or malicious print job manipulation.
+
+---
+
+### Phase 6: Edge Routing Whitelists & Temporal Fencing
+#### [Step 6] Microsoft Edge Content Isolation Whitelisting
+* **Timestamp / Date:** 05:12 AM | June 12, 2026
+* **Technical Action:** Programmed the browser URL exception matrix within the administrative GPO template. Formatted explicit protocol blocks allowing navigation exclusively to `https://google.com` and `https://wikipedia.org`, mitigating external command-and-control communication or recreational surfing.
+
+#### [Step 7] Active Directory Session Hardening Integration
+* **Timestamp / Date:** 05:16 AM | June 12, 2026
+* **Technical Action:** Configured the security policy rule `Microsoft network server: Disconnect clients when logon hours expire` to **Enabled**, cementing active system-side enforcement of user lifecycle rules.
+
+#### [Step 8] Temporal Fencing Matrix Construction
+* **Timestamp / Date:** 05:21 AM - 05:27 AM | June 12, 2026
+* **Technical Action:** Executed bulk property injections across the `Guest01` through `Guest20` account sheets. Implemented strict operational access fences restricting directory authentication capabilities exclusively to **Monday-Saturday, 08:00 AM - 08:00 PM**, while hard-blocking all access on Sundays.
+
+#### [Step 9] Security Domain Policy Engine Synchronization
+* **Timestamp / Date:** 05:28 AM | June 12, 2026
+* **Technical Action:** Initiated a system-wide policy propagation via administrative PowerShell. Executed `gpupdate /force` to execute an immediate sync of newly committed parameters, confirming successful execution across computer and user registry blocks.
+
+---
+
+### Phase 4: Full Shell Hardening Policies
+#### [Step 10] Control Panel Interdiction Policy Execution
+* **Timestamp / Date:** 11:43 PM | June 12, 2026
+* **Technical Action:** Configured the `Prohibit access to Control Panel and PC settings` sub-key to block users from modifying configurations or viewing network device schemas.
+
+#### [Step 11] Start Menu Interdiction Policy Integration
+* **Timestamp / Date:** 11:48 PM | June 12, 2026
+* **Technical Action:** Applied strict shell path limitations by explicitly disabling the `Run` sub-menus across the start container and task sequence interfaces.
+
+#### [Step 12] Task Manager Shell Removal Execution
+* **Timestamp / Date:** 11:49 PM | June 12, 2026
+* **Technical Action:** Disabled user diagnostic overrides by disabling `Task Manager` access under security interface triggers, preventing execution of `taskmgr.exe`.
+
+#### [Step 13] Inactivity Timeout System Automation
+* **Timestamp / Date:** 11:53 PM - 11:55 PM | June 12, 2026
+* **Technical Action:** Automated station lockout protocols by forcing the deployment of a default screen saver thread matched against a hard **300-second** processing countdown.
+
+---
+
+## 🛠️ Key Technical Competencies Demonstrated
+
+- **Windows Server Administration:** Core system engineering utilizing advanced configurations of Active Directory Domain Services (AD DS).
+- **Group Policy Infrastructure Engineering:** Direct implementation of advanced custom registry controls, interface shielding, and whitelisting.
+- **System Hardening & Information Assurance:** Practical deployment of multi-user environment configurations designed against local permission escalation vector sets.
+- **Enterprise Network Services Management:** Secure mapping and ACL configuration of core infrastructure services including network share blocks and enterprise printing infrastructures.
+"""
+
+with open("README.md", "w") as f:
+    f.write(content)
+
+print("SUCCESS")
