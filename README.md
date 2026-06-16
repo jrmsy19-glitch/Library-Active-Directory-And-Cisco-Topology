@@ -137,7 +137,3 @@ Below is the verified chronological ledger of the system configuration, capturin
 - **Enterprise Network Services Management:** Secure mapping and ACL configuration of core infrastructure services including network share blocks and enterprise printing infrastructures.
 """
 
-with open("README.md", "w") as f:
-    f.write(content)
-
-print("SUCCESS")
