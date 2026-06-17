@@ -223,5 +223,5 @@ This diagram shows the completed deployment consisting of twenty public kiosk wo
 - **System Hardening & Information Assurance:** Practical deployment of multi-user environment configurations designed against local permission escalation vector sets.
 - **Enterprise Network Services Management:** Secure mapping and ACL configuration of core infrastructure services including network share blocks and enterprise printing infrastructures.
 - **Cisco Hardware Deployment & Configuration:** Designed architectual network environment to illustrate AD setup from a locigal and physcial prespective. 
-"""
+
 
