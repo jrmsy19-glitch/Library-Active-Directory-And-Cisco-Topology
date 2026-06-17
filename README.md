@@ -166,8 +166,6 @@ Below is the verified chronological ledger of the system configuration, capturin
 
 ### Screenshot 01 – High-Level Network Architecture
 
-![Network Architecture]
-
 <img width="1466" height="594" alt="Screenshot 2026-06-12 at 8 46 23 PM" src="https://github.com/user-attachments/assets/b07628c7-2043-458f-9b4a-879d3b3659fa" />
 
 **Description**
@@ -185,8 +183,6 @@ This diagram illustrates the logical architecture of the environment. Utilizing 
 ---
 
 ### Screenshot 02 – Full Library Network Deployment
-
-![Library Topology]
 
 <img width="1470" height="597" alt="Screenshot 2026-06-12 at 8 42 20 PM" src="https://github.com/user-attachments/assets/2c1da9a0-26ab-4115-a7aa-6d1598877a80" />
 
