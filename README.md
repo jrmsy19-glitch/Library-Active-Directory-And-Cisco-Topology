@@ -81,10 +81,14 @@ Below is the verified chronological ledger of the system configuration, capturin
 * **Timestamp / Date:** 03:43 AM | June 12, 2026
 * **Technical Action:** Initialized the Network Printer Installation Wizard on the `lib-dc-2022` host. Provisioned the public-facing printing queue object (`Lib-Public-Kiosk-Printer`) mapped to a localized port using a clean system-compatible text-only abstraction driver.
 
+<img width="946" height="722" alt="Screenshot 2026-06-11 at 10 45 54 PM" src="https://github.com/user-attachments/assets/4640109b-a940-4953-8860-302bea1a931d" />
+
 
 #### [Step 4] Staff Printer Object Deployment
 * **Timestamp / Date:** 03:45 AM | June 12, 2026
 * **Technical Action:** Provisioned the parallel high-privilege staff printing queue (`Lib-Staff-Only-Printer`). Verified server tracking shows both active printer queues sitting in a steady `Ready` queue status.
+
+<img width="945" height="743" alt="Screenshot 2026-06-11 at 11 19 20 PM" src="https://github.com/user-attachments/assets/7d552af1-5bd9-46b4-8be0-dbedf534d2ea" />
 
 
 #### [Step 5] Access Control List (ACL) Printer Hardening
@@ -126,17 +130,29 @@ Below is the verified chronological ledger of the system configuration, capturin
 * **Timestamp / Date:** 11:43 PM | June 12, 2026
 * **Technical Action:** Configured the `Prohibit access to Control Panel and PC settings` sub-key to block users from modifying configurations or viewing network device schemas.
 
+<img width="1380" height="635" alt="Screenshot 2026-06-12 at 6 43 50 PM" src="https://github.com/user-attachments/assets/1b261a42-b8a2-496c-bdd6-b1c8acf4fabf" />
+
+
 #### [Step 11] Start Menu Interdiction Policy Integration
 * **Timestamp / Date:** 11:48 PM | June 12, 2026
 * **Technical Action:** Applied strict shell path limitations by explicitly disabling the `Run` sub-menus across the start container and task sequence interfaces.
+
+<img width="1349" height="637" alt="Screenshot 2026-06-12 at 6 48 36 PM" src="https://github.com/user-attachments/assets/1aa0013b-95d2-4dc9-821e-22c37dec9bc5" />
+
 
 #### [Step 12] Task Manager Shell Removal Execution
 * **Timestamp / Date:** 11:49 PM | June 12, 2026
 * **Technical Action:** Disabled user diagnostic overrides by disabling `Task Manager` access under security interface triggers, preventing execution of `taskmgr.exe`.
 
+<img width="1362" height="637" alt="Screenshot 2026-06-12 at 6 49 50 PM" src="https://github.com/user-attachments/assets/179ee7df-2cda-41d5-91d6-f2f4a3b4e785" />
+
+
 #### [Step 13] Inactivity Timeout System Automation
 * **Timestamp / Date:** 11:53 PM - 11:55 PM | June 12, 2026
 * **Technical Action:** Automated station lockout protocols by forcing the deployment of a default screen saver thread matched against a hard **300-second** processing countdown.
+
+<img width="1364" height="638" alt="Screenshot 2026-06-12 at 6 53 57 PM" src="https://github.com/user-attachments/assets/7faaa4ca-baa6-4518-a3bc-23139fa98ed3" />
+
 
 ---
 
