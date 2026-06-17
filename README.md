@@ -70,9 +70,17 @@ Below is the verified chronological ledger of the system configuration, capturin
 * **Timestamp / Date:** 03:17 AM - 03:18 AM | June 12, 2026
 * **Technical Action:** Built out the physical profile directories on the server's primary storage block (`C:\\Profiles\\Mandatory.v6`). Established the network share definitions and locked down security properties to ensure guest sessions pull a static profile without modification capacity.
 
+
+<img width="1163" height="536" alt="Screenshot 2026-06-11 at 10 27 33 PM" src="https://github.com/user-attachments/assets/e5dac950-12eb-4abd-9613-3e5e4d5fb87d" />
+
+<img width="1124" height="596" alt="Screenshot 2026-06-11 at 10 18 31 PM" src="https://github.com/user-attachments/assets/22fdf5c3-5ab3-4284-bcc7-550f25d58939" />
+
+
 #### [Step 2] Active Directory Schema Layout
 * **Timestamp / Date:** Context Snapshot (Pre-Configuration verification)
 * **Technical Action:** Modeled the domain root tree hierarchy under `library.lan` and established the baseline link structure for the `Public_Kiosk_Hardening_Policy` GPO to guarantee targeted inheritance across the kiosk OUs.
+
+<img width="754" height="530" alt="Screenshot 2026-06-11 at 10 12 40 PM" src="https://github.com/user-attachments/assets/8cfe33f8-2649-488a-ae3b-506411c2433b" />
 
 ---
 
@@ -81,8 +89,7 @@ Below is the verified chronological ledger of the system configuration, capturin
 * **Timestamp / Date:** 03:43 AM | June 12, 2026
 * **Technical Action:** Initialized the Network Printer Installation Wizard on the `lib-dc-2022` host. Provisioned the public-facing printing queue object (`Lib-Public-Kiosk-Printer`) mapped to a localized port using a clean system-compatible text-only abstraction driver.
 
-<img width="946" height="722" alt="Screenshot 2026-06-11 at 10 45 54 PM" src="https://github.com/user-attachments/assets/4640109b-a940-4953-8860-302bea1a931d" />
-
+<img width="944" height="725" alt="Screenshot 2026-06-11 at 10 43 59 PM" src="https://github.com/user-attachments/assets/43f503de-f058-4863-8c3c-4395f95ffa1c" />
 
 #### [Step 4] Staff Printer Object Deployment
 * **Timestamp / Date:** 03:45 AM | June 12, 2026
