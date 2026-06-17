@@ -213,7 +213,7 @@ This diagram shows the completed deployment consisting of twenty public kiosk wo
 - Staff and Patron Segmentation
 - Shared Printing Services
 - Cisco Switching Infrastructure
-- Enterprise Network Design Principles![Uploading Screenshot 2026-06-12 at 8.46.23 PM.png…]()
+- Enterprise Network Design Principles!
 
 
 
