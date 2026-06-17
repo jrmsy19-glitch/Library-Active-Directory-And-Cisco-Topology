@@ -162,7 +162,7 @@ Below is the verified chronological ledger of the system configuration, capturin
 
 
 ---
-## Network Topology Screenshots
+## Cisco Packet Tracer Network Configuration andScreenshots
 
 ### Screenshot 01 – High-Level Network Architecture
 
@@ -172,7 +172,7 @@ Below is the verified chronological ledger of the system configuration, capturin
 
 **Description**
 
-This diagram illustrates the logical architecture of the environment. The Windows Server 2022 Domain Controller connects to a Cisco Catalyst 3650 Layer 3 Core Switch, which serves as the central point for routing and segmentation between operational zones.
+This diagram illustrates the logical architecture of the environment. Utilizing a Cisco Catalyst 3650 Layer 3 Core Switch, which serves as the central point for routing and segmentation between operational zones.
 
 **Highlights**
 
@@ -215,19 +215,13 @@ This diagram shows the completed deployment consisting of twenty public kiosk wo
 - Cisco Switching Infrastructure
 - Enterprise Network Design Principles!
 
-
-
-
-
-
 ---
-
-
 ## 🛠️ Key Technical Competencies Demonstrated
 
 - **Windows Server Administration:** Core system engineering utilizing advanced configurations of Active Directory Domain Services (AD DS).
 - **Group Policy Infrastructure Engineering:** Direct implementation of advanced custom registry controls, interface shielding, and whitelisting.
 - **System Hardening & Information Assurance:** Practical deployment of multi-user environment configurations designed against local permission escalation vector sets.
 - **Enterprise Network Services Management:** Secure mapping and ACL configuration of core infrastructure services including network share blocks and enterprise printing infrastructures.
+- **Cisco Hardware Deployment & Configuration:** Designed architectual network environment to illustrate AD setup from a locigal and physcial prespective. 
 """
 
