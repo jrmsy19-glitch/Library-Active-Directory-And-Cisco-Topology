@@ -162,6 +162,66 @@ Below is the verified chronological ledger of the system configuration, capturin
 
 
 ---
+## Network Topology Screenshots
+
+### Screenshot 01 – High-Level Network Architecture
+
+![Network Architecture]
+
+<img width="1466" height="594" alt="Screenshot 2026-06-12 at 8 46 23 PM" src="https://github.com/user-attachments/assets/b07628c7-2043-458f-9b4a-879d3b3659fa" />
+
+**Description**
+
+This diagram illustrates the logical architecture of the environment. The Windows Server 2022 Domain Controller connects to a Cisco Catalyst 3650 Layer 3 Core Switch, which serves as the central point for routing and segmentation between operational zones.
+
+**Highlights**
+
+- Centralized Active Directory infrastructure
+- Public Kiosk Zone
+- Staff Operations Zone
+- Layer 3 Core Switching
+- Enterprise-style network segmentation
+
+---
+
+### Screenshot 02 – Full Library Network Deployment
+
+![Library Topology]
+
+<img width="1470" height="597" alt="Screenshot 2026-06-12 at 8 42 20 PM" src="https://github.com/user-attachments/assets/2c1da9a0-26ab-4115-a7aa-6d1598877a80" />
+
+
+**Description**
+
+This diagram shows the completed deployment consisting of twenty public kiosk workstations, four staff workstations, shared printers, access switches, and centralized domain services.
+
+**Infrastructure Summary**
+
+| Resource | Quantity |
+|-----------|-----------|
+| Public Workstations | 20 |
+| Staff Workstations | 4 |
+| Domain Controllers | 1 |
+| Core Switches | 1 |
+| Access Switches | 2 |
+| Network Printers | 2 |
+
+**Implemented Features**
+
+- Active Directory Integration
+- Centralized Authentication
+- Staff and Patron Segmentation
+- Shared Printing Services
+- Cisco Switching Infrastructure
+- Enterprise Network Design Principles![Uploading Screenshot 2026-06-12 at 8.46.23 PM.png…]()
+
+
+
+
+
+
+---
+
 
 ## 🛠️ Key Technical Competencies Demonstrated
 
