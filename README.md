@@ -81,13 +81,16 @@ Below is the verified chronological ledger of the system configuration, capturin
 * **Timestamp / Date:** 03:43 AM | June 12, 2026
 * **Technical Action:** Initialized the Network Printer Installation Wizard on the `lib-dc-2022` host. Provisioned the public-facing printing queue object (`Lib-Public-Kiosk-Printer`) mapped to a localized port using a clean system-compatible text-only abstraction driver.
 
+
 #### [Step 4] Staff Printer Object Deployment
 * **Timestamp / Date:** 03:45 AM | June 12, 2026
 * **Technical Action:** Provisioned the parallel high-privilege staff printing queue (`Lib-Staff-Only-Printer`). Verified server tracking shows both active printer queues sitting in a steady `Ready` queue status.
 
+
 #### [Step 5] Access Control List (ACL) Printer Hardening
 * **Timestamp / Date:** 04:18 AM - 04:19 AM | June 12, 2026
 * **Technical Action:** Hardened the print security properties by binding an explicit Role-Based Access Control list. Tied permission models specifically to the `Staff-Prnt-Allowed` security group to prevent public access or malicious print job manipulation.
+<img width="945" height="743" alt="Screenshot 2026-06-11 at 11 19 20 PM" src="https://github.com/user-attachments/assets/a641487f-299b-41d1-8d93-9ec154128977" />
 
 ---
 
@@ -95,18 +98,26 @@ Below is the verified chronological ledger of the system configuration, capturin
 #### [Step 6] Microsoft Edge Content Isolation Whitelisting
 * **Timestamp / Date:** 05:12 AM | June 12, 2026
 * **Technical Action:** Programmed the browser URL exception matrix within the administrative GPO template. Formatted explicit protocol blocks allowing navigation exclusively to `https://google.com` and `https://wikipedia.org`, mitigating external command-and-control communication or recreational surfing.
+<img width="1281" height="635" alt="Screenshot 2026-06-12 at 12 13 43 AM" src="https://github.com/user-attachments/assets/a522c4e4-6840-4d59-886e-e907d9e5a57a" />
 
 #### [Step 7] Active Directory Session Hardening Integration
 * **Timestamp / Date:** 05:16 AM | June 12, 2026
 * **Technical Action:** Configured the security policy rule `Microsoft network server: Disconnect clients when logon hours expire` to **Enabled**, cementing active system-side enforcement of user lifecycle rules.
+<img width="1117" height="573" alt="Screenshot 2026-06-12 at 12 16 35 AM" src="https://github.com/user-attachments/assets/b3a464f7-1f77-4b81-9e73-d3f331e46684" />
+
 
 #### [Step 8] Temporal Fencing Matrix Construction
 * **Timestamp / Date:** 05:21 AM - 05:27 AM | June 12, 2026
-* **Technical Action:** Executed bulk property injections across the `Guest01` through `Guest20` account sheets. Implemented strict operational access fences restricting directory authentication capabilities exclusively to **Monday-Saturday, 08:00 AM - 08:00 PM**, while hard-blocking all access on Sundays.
+* **Technical Action:** Executed bulk property injections across the `Guest01` through `Guest20` account sheets. Implemented strict operational access fences restricting directory authentication capabilities exclusively to **Monday-Saturday, 09:00 AM - 08:00 PM**, while hard-blocking all access on Sundays.
+<img width="1387" height="618" alt="Screenshot 2026-06-12 at 12 27 27 AM" src="https://github.com/user-attachments/assets/8d6ab88b-084c-43dd-9e5c-ad810b4d6e42" />
+
+
 
 #### [Step 9] Security Domain Policy Engine Synchronization
 * **Timestamp / Date:** 05:28 AM | June 12, 2026
 * **Technical Action:** Initiated a system-wide policy propagation via administrative PowerShell. Executed `gpupdate /force` to execute an immediate sync of newly committed parameters, confirming successful execution across computer and user registry blocks.
+<img width="975" height="511" alt="Screenshot 2026-06-12 at 12 28 34 AM" src="https://github.com/user-attachments/assets/24956cc9-1c7b-4d9f-9bc9-4b5659ae95f6" />
+
 
 ---
 
