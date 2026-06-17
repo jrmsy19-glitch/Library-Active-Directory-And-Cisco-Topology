@@ -1,6 +1,6 @@
 # Windows Server Hardening, Active Directory Infrastructure Deployment (GCP) & Cisco Packet Tracer Network Topology
 
-An enterprise-grade implementation of a secure Windows Server environment running on Google Cloud Platform (GCP). This project demonstrates the implementation of strict security benchmarks, Active Directory (AD) infrastructure engineering, Group Policy Object (GPO) engineering, mandatory user profiles, network print management, and environment isolation designed for a public library kiosk deployment.
+An enterprise-grade implementation of a secure Windows Server environment running on Google Cloud Platform (GCP). This project demonstrates the implementation of strict security benchmarks, Active Directory (AD) infrastructure engineering, Group Policy Object (GPO) engineering, mandatory user profiles, network print management, and environment isolation designed for a public library kiosk deployment. In addition, this lab also showcases network hardware configuriation and segmentation via Cisco Packet Tracer.
 
 ---
 
